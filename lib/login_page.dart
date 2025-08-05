@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:latihan1_11pplg1/home_page.dart';
 import 'package:latihan1_11pplg1/register_page.dart';
+import 'package:latihan1_11pplg1/widgets/widgets_button.dart';
+import 'package:latihan1_11pplg1/widgets/widgets_textField.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -69,40 +71,40 @@ class _LoginPageState extends State<LoginPage> {
                 height: 100,
               ),
             ),
-            // isian username dan password
+
+            SizedBox(height: 10,),
             Container(
               margin: EdgeInsets.only(top: 20, bottom: 20),
-              child: TextField(
-                controller: userController,
-                decoration: InputDecoration(hintText: 'Masukkan username'),
+              child: customTextField(textEditingController: userController, labelText: "inputkan username",),
+            ),
+            customTextField(textEditingController: passController, labelText: "inputkan password", isPassword : true),
+
+            // dengan reusable widget
+            Container(
+              margin: EdgeInsets.only(top: 25),
+              child: Center(
+                child: CustomButton(text: "Login", textColor: Colors.blue, onPressed: (){
+                  if(userController.text == "admin" && passController.text == "admin"){
+                    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
+                  } else{
+                    ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("username atau password salah")));
+                  }
+                }),
               ),
             ),
 
-            TextField(
-              controller: passController,
-              decoration: InputDecoration(hintText: 'Masukkan password'),
-              obscureText: true,
-            ),
-            // style : hint, hidden char for password
-            // button login, style nya bebas
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              child: Center(
-                child: ElevatedButton(onPressed: _login, child: Text('Login')),
-                //onPressed: () {
-                //if(userController.text == "admin" && passController.text == "admin"){
-                //setState((){
-                //statusLogin = "sukses  login";
-                //print(statusLogin);
-                //});
-                //} else {
-                //setState((){
-                //statusLogin = "gagal  login";
-                //print(statusLogin);
-                //});
-                //}
-              ),
-            ),
+            // Container(
+            //   margin: EdgeInsets.only(top: 25),
+            //   child: Center(
+            //     child: CustomButton(text: "Registrasi", textColor: const Color.fromARGB(255, 147, 201, 0), onPressed: (){}),
+            //   ),
+            // ),
+
             Container(
               margin: EdgeInsets.only(top: 20),
               child: Center(child: Text("Belum punya akun? Register dulu ")),
@@ -123,6 +125,43 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+      // isian username dan password
+            // Container(
+            //   margin: EdgeInsets.only(top: 20, bottom: 20),
+            //   child: TextField(
+            //     controller: userController,
+            //     decoration: InputDecoration(hintText: 'Masukkan username'),
+            //   ),
+            // ),
+
+            // TextField(
+            //   controller: passController,
+            //   decoration: InputDecoration(hintText: 'Masukkan password'),
+            //   obscureText: true,
+            // ),
+
+            // style : hint, hidden char for password
+            // button login, style nya bebas
+            // Container(
+            //   margin: EdgeInsets.only(top: 20),
+            //   child: Center(
+            //     child: ElevatedButton(onPressed: _login, child: Text('Login')),
+            //     //onPressed: () {
+            //     //if(userController.text == "admin" && passController.text == "admin"){
+            //     //setState((){
+            //     //statusLogin = "sukses  login";
+            //     //print(statusLogin);
+            //     //});
+            //     //} else {
+            //     //setState((){
+            //     //statusLogin = "gagal  login";
+            //     //print(statusLogin);
+            //     //});
+            //     //}
+            //   ),
+            // ),
+
+  
     );
   }
 }
