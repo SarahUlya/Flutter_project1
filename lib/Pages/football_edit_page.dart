@@ -6,10 +6,10 @@ import 'package:latihan1_11pplg1/models/football_models.dart';
 class FootballEditPage extends StatelessWidget {
   FootballEditPage({super.key});
   final FootballControl footballControl = Get.find();
-  final Map args = Get.arguments;
+  final receivedArguments = Get.arguments;
 
-  late final Football player = args['player'];
-  late final int index = args['index'];
+  late final Football player = receivedArguments['player'];
+  late final int index = receivedArguments['index'];
 
   final TextEditingController nameControl = TextEditingController();
   final TextEditingController positionControl = TextEditingController();
